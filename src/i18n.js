@@ -124,7 +124,13 @@ export const getLang = () => {
 
 export const t = (key) => {
   const lang = getLang();
-  return translations[lang]?.[key] || translations['de'][key] || key;
+  const val = translations[lang]?.[key] ?? translations['de']?.[key] ?? key;
+  return val;
+};
+
+export const tStr = (key) => {
+  const val = t(key);
+  return Array.isArray(val) ? val.join(' ') : String(val);
 };
 
 export default translations;
